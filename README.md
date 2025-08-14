@@ -15,7 +15,7 @@ Why? `node_modules` often grows large and lingers across monorepos, sandboxes, a
 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/rm-node-modules.git
+git clone https://github.com/dagjomar/rm-node-modules.git
 cd rm-node-modules
 ```
 
