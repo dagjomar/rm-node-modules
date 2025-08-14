@@ -66,10 +66,9 @@ if [ ! -d "$root_dir" ]; then
   exit 1
 fi
 
-# Build find command (simple, no excludes/max-depth)
-
-# Compose find that selects node_modules directories anywhere under root.
-composed=( find "$root_dir" -type d -name node_modules -print )
+# Build find command: list only top-most node_modules and do not descend into them
+# This avoids counting nested node_modules inside dependencies (massively reducing duplicates)
+composed=( find "$root_dir" -type d -name node_modules -prune -print )
 
 log_debug "Find command: ${composed[*]}"
 
@@ -156,5 +155,3 @@ if [ $errors -gt 0 ]; then
 fi
 
 log_info "Done."
-
-

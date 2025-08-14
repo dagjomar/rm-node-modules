@@ -30,6 +30,10 @@ echo "x" > "$TEST_DIR/mono/packages/b/node_modules/file.txt"
 echo "x" > "$TEST_DIR/scratch/proj1/node_modules/file.txt"
 echo "x" > "$TEST_DIR/archive/proj2/node_modules/file.txt"
 
+# Create nested node_modules under an existing node_modules to ensure pruning
+mkdir -p "$TEST_DIR/mono/node_modules/foo/node_modules"
+echo "x" > "$TEST_DIR/mono/node_modules/foo/node_modules/file.txt"
+
 # 1) Dry-run, no deletions, should list all
 out=$("$RMN" --dry-run "$TEST_DIR")
 echo "$out"
@@ -37,6 +41,9 @@ assert_contains "$out" "Found 5 node_modules"
 assert_contains "$out" "DRY: $TEST_DIR/mono/node_modules"
 assert_contains "$out" "DRY: $TEST_DIR/mono/packages/a/node_modules"
 assert_contains "$out" "DRY: $TEST_DIR/mono/packages/b/node_modules"
+
+# Ensure nested node_modules under mono/node_modules is not listed due to pruning
+echo "$out" | grep -q "$TEST_DIR/mono/node_modules/foo/node_modules" && fail "Nested node_modules should be pruned"
 
 # 2) Delete with -y
 "$RMN" -y "$TEST_DIR"
@@ -49,5 +56,3 @@ assert_not_exists "$TEST_DIR/archive/proj2/node_modules"
 
 echo "✅ All tests passed"
 rm -rf "$TEST_DIR"
-
-
