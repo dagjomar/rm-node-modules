@@ -1,6 +1,8 @@
 # rm-node-modules
 
-A tiny CLI to find and delete `node_modules` folders under a directory tree.
+## A tiny CLI to find and delete `node_modules` folders under a directory tree.
+
+<img src="./docs/rm-node-modules-illustration.jpg" alt="rm node modules logo illustration" width="500"/>
 
 Why? `node_modules` often grows large and lingers across monorepos, sandboxes, and archived projects. When you want to reclaim disk space or reset dependencies, `rm-node-modules` sweeps through a parent directory and removes all `node_modules` folders — starting from the top-most ones first.
 
@@ -27,14 +29,14 @@ chmod +x bin/rm-node-modules.sh
 
 3. Add a shell alias (so you can run `rm-node-modules` from anywhere)
 
-Zsh (`~/.zshrc`):
+- #### Zsh example (`~/.zshrc`):
 
 ```bash
 echo "\n\nalias rm-node-modules='$(pwd)/bin/rm-node-modules.sh'" >> ~/.zshrc
 source ~/.zshrc
 ```
 
-Bash (`~/.bashrc`):
+- #### Bash example (`~/.bashrc`):
 
 ```bash
 echo "\n\nalias rm-node-modules='$(pwd)/bin/rm-node-modules.sh'" >> ~/.bashrc
