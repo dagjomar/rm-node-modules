@@ -12,23 +12,39 @@ Why? `node_modules` often grows large and lingers across monorepos, sandboxes, a
 
 ### Installation
 
-Option A: use the script directly
+1. Clone the repository
 
 ```bash
-chmod +x rm-node-modules/bin/rm-node-modules.sh
-./rm-node-modules/bin/rm-node-modules.sh --help
+git clone https://github.com/your-username/rm-node-modules.git
+cd rm-node-modules
 ```
 
-Option B: add to your PATH
+2. Make the script executable
 
 ```bash
-# Example: add a shell alias
-alias rm-node-modules="/absolute/path/to/rm-node-modules/bin/rm-node-modules.sh"
+chmod +x bin/rm-node-modules.sh
+```
 
-# Or symlink into a directory on PATH
-ln -s \
-  /absolute/path/to/rm-node-modules/bin/rm-node-modules.sh \
-  /usr/local/bin/rm-node-modules
+3. Add a shell alias (so you can run `rm-node-modules` from anywhere)
+
+Zsh (`~/.zshrc`):
+
+```bash
+echo "\n\nalias rm-node-modules='$(pwd)/bin/rm-node-modules.sh'" >> ~/.zshrc
+source ~/.zshrc
+```
+
+Bash (`~/.bashrc`):
+
+```bash
+echo "\n\nalias rm-node-modules='$(pwd)/bin/rm-node-modules.sh'" >> ~/.bashrc
+source ~/.bashrc
+```
+
+You can verify the installation with:
+
+```bash
+rm-node-modules --help
 ```
 
 ### Usage
